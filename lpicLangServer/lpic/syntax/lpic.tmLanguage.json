@@ -1,0 +1,113 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "scopeName": "source.lpic",
+  "name": "LPiConTeXt",
+  "injectionSelector" : "L:source.context",
+  "fileTypes": ["tex"],
+  "firstLineMatch" : "^%% lpic",
+  "foldingStartMarker": "\\\\(start.*|b(TABLE|TD|TR))",
+  "foldingStopMarker": "\\\\(stop.*|e(TABLE|TD|TR))",
+  "patterns": [ { "include": "#lpic" } ],
+  "repository": {
+    "lpic" : {
+      "patterns": [
+        {"include": "#MkIVCode"},
+        {"include": "#MpIVCode"},
+        {"include": "#LuaCode"},
+        {"include": "#LuaTemplate"},
+        {"include": "#CHeader"},
+        {"include": "#CCode"}
+      ]
+    },
+    "MkIVCode" : {
+      "begin": "(\\\\startMkIVCode)",
+      "captures": {
+        "0": {
+          "name": "keyword.control.document.context"
+        }
+      },
+      "end": "(\\\\stopMkIVCode",
+      "name": "meta.scope.tex.mkivcode",
+      "patterns": [
+        {
+          "include": "source.mkiv"
+        }
+      ]
+    },
+    "MpIVCode" : {
+      "begin": "(\\\\startMpIVCode)",
+      "captures": {
+        "0": {
+          "name": "keyword.control.document.context"
+        }
+      },
+      "end": "(\\\\stopMpIVCode",
+      "name": "meta.scope.tex.mpivcode",
+      "patterns": [
+        {
+          "include": "source.mpiv"
+        }
+      ]
+    },
+    "LuaCode" : {
+      "begin": "(\\\\startLuaCode)",
+      "captures": {
+        "0": {
+          "name": "keyword.control.document.context"
+        }
+      },
+      "end": "(\\\\stopLuaCode",
+      "name": "meta.scope.tex.luacode",
+      "patterns": [
+        {
+          "include": "source.lua"
+        }
+      ]
+    },
+    "LuaTemplate" : {
+      "begin": "(\\\\startLuaTemplate)",
+      "captures": {
+        "0": {
+          "name": "keyword.control.document.context"
+        }
+      },
+      "end": "(\\\\stopLuaTemplate",
+      "name": "meta.scope.tex.luatemplate",
+      "patterns": [
+        {
+          "include": "source.lua"
+        }
+      ]
+    },
+    "CHeader" : {
+      "begin": "(\\\\startCHeader)",
+      "captures": {
+        "0": {
+          "name": "keyword.control.document.context"
+        }
+      },
+      "end": "(\\\\stopCHeader",
+      "name": "meta.scope.tex.cheader",
+      "patterns": [
+        {
+          "include": "source.cpp"
+        }
+      ]
+    },
+    "CCode" : {
+      "begin": "(\\\\startCCode)",
+      "captures": {
+        "0": {
+          "name": "keyword.control.document.context"
+        }
+      },
+      "end": "(\\\\stopCCode",
+      "name": "meta.scope.tex.ccode",
+      "patterns": [
+        {
+          "include": "source.cpp"
+        }
+      ]
+    }
+  }
+}

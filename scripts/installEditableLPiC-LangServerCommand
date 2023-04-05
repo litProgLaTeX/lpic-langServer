@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# This bash script uses the current working directory to create a simple
+# script to run the lpic-langserver command anywhere in a user's
+# workspace.
+
+cmdScript=$(pwd)/.venv/bin/lpic-langserver
+
+cat << CMD_SCRIPT > $HOME/.local/bin/lpic-langserver
+#!/bin/sh
+
+# This shell script was created by the ConTeXt2ninja tool
+#       './scripts/installEditableLPiC-LangServerCommand'
+# script.
+
+exec $cmdScript \$@
+CMD_SCRIPT
+
+chmod a+x $HOME/.local/bin/lpic-langserver
+
+echo ""
+echo "Editable lpic-langserver command has been created"
+echo ""

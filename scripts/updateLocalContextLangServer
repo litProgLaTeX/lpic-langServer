@@ -1,0 +1,12 @@
+#! .venv/bin/python
+
+import os
+import site;
+import yaml
+
+venvSitePackage = site.getsitepackages()[0]
+
+os.chdir(venvSitePackage)
+
+os.system("rm -rf contextLangServer")
+os.system("cp -r ../../../../../../conTeXt-langServer/python/contextLangServer ."  )
