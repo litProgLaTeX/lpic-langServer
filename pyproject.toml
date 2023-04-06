@@ -7,7 +7,7 @@ authors = [
 ]
 dependencies = [
     "pyyaml>=6.0",
-    "pkg @ git+https://github.com/litProgConTeXt/conTeXt-langServer.git@main#subdirectory=python",
+    "pkg @ git+https://github.com/litProgConTeXt/conTeXt-langServer.git@main",
 ]
 requires-python = ">=3.10"
 license = {text = "Apache2.0"}
