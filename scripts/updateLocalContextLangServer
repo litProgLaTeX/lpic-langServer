@@ -4,9 +4,9 @@ import os
 import site;
 import yaml
 
-venvSitePackage = site.getsitepackages()[0]
+venvSitePackage       = site.getsitepackages()[0]
+venvContextLangServer = os.path.join(venvSitePackage, 'contextLangServer' )
+#print(venvContextLangServer)
 
-os.chdir(venvSitePackage)
-
-os.system("rm -rf contextLangServer")
-os.system("cp -r ../../../../../../conTeXt-langServer/python/contextLangServer ."  )
+os.system(f"rm -rf {venvContextLangServer}")
+os.system(f"cp -r ../conTeXt-langServer/contextLangServer {venvSitePackage}")
