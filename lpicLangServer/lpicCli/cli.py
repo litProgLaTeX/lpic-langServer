@@ -30,9 +30,8 @@ def cli() :
   print(yaml.dump(cliArgs))
   filePath = cliArgs['filePath']
 
-  Grammar.loadFromResourceDir('contextLangServer.context.syntax')
-  Grammar.loadFromResourceDir('lpicLangServer.lpic.syntax')
-
+  Grammar.loadFromResourceDir('lpicSyntaxes')
+  
   Grammar.dumpGrammar()
 
   if cliArgs['save'] : 
