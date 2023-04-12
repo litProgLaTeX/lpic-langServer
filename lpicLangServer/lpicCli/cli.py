@@ -20,11 +20,20 @@ def cli() :
   argParser.add_argument('--prune', action='store_true',
     help="Prune unused patterns from grammar"
   )
+  argParser.add_argument('--onlyActions', action='store_true',
+    help="Limit the scope paths to those with loaded actions"
+  )
+  argParser.add_argument("--grammar", action='store_true',
+    help="Show the currently loaded Grammar"
+  )
+  argParser.add_argument("--patterns", action='store_true',
+    help="Show the patterns"
+  )
   argParser.add_argument('--scopePaths', action='store_true',
     help="List the scopePaths found in the current grammar"
   )
-  argParser.add_argument('--onlyActions', action='store_true',
-    help="Limit the scope paths to those with loaded actions"
+  argParser.add_argument("--rules", action='store_true',
+    help="Show the rules"
   )
   cliArgs = vars(argParser.parse_args())
   #print(yaml.dump(cliArgs))
@@ -33,6 +42,28 @@ def cli() :
   Grammar.loadFromResourceDir('lpicSyntaxes')
   
   #Grammar.dumpGrammar()
+
+  if cliArgs['patterns'] :
+    if cliArgs['prune'] :
+      Grammar.pruneRepository(None)
+    patterns = Grammar.collectPatternReferences()
+    print("--patterns---------------------------------------------------")
+    print(yaml.dump(patterns))
+    return
+
+  if cliArgs['rules'] :
+    if cliArgs['prune'] :
+      Grammar.pruneRepository(None)
+    rules = Grammar.collectRules()
+    print("--rules------------------------------------------------------")
+    print(yaml.dump(rules))
+    return
+
+  if cliArgs['grammar'] :
+    if cliArgs['prune'] :
+      Grammar.pruneRepository(None)
+    Grammar.dumpGrammar()
+    return
 
   if cliArgs['save'] : 
     if cliArgs['prune'] :
