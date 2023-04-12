@@ -5,6 +5,8 @@ import yaml
 
 from contextLangServer.processor.grammar import Grammar
 from contextLangServer.processor.documents import DocumentCache
+from contextLangServer.processor.scopeActions import ScopeActions
+
 #from .extract import extractFrom
 
 def cli() :
@@ -35,39 +37,38 @@ def cli() :
   argParser.add_argument("--rules", action='store_true',
     help="Show the rules"
   )
+  argParser.add_argument("--actions", action='store_true',
+    help="Show the actions"
+  )
   cliArgs = vars(argParser.parse_args())
   #print(yaml.dump(cliArgs))
   filePath = cliArgs['filePath']
 
+  if cliArgs['actions'] :
+    ScopeActions.listActions()
+    return
+
   Grammar.loadFromResourceDir('lpicSyntaxes')
-  
-  #Grammar.dumpGrammar()
+  Grammar.collectRules()
+  if cliArgs['prune'] : Grammar.pruneRules()
 
   if cliArgs['patterns'] :
-    if cliArgs['prune'] :
-      Grammar.pruneRepository(None)
     patterns = Grammar.collectPatternReferences()
     print("--patterns---------------------------------------------------")
     print(yaml.dump(patterns))
     return
 
   if cliArgs['rules'] :
-    if cliArgs['prune'] :
-      Grammar.pruneRepository(None)
     rules = Grammar.collectRules()
     print("--rules------------------------------------------------------")
     print(yaml.dump(rules))
     return
 
   if cliArgs['grammar'] :
-    if cliArgs['prune'] :
-      Grammar.pruneRepository(None)
     Grammar.dumpGrammar()
     return
 
   if cliArgs['save'] : 
-    if cliArgs['prune'] :
-      Grammar.pruneRepository(cliArgs['save'])
     if Grammar.savedToFile(cliArgs['save'], filePath) :
       print(f"Saved current syntax to the tmLanguage.json file:\n  {filePath}\n")
     else :
@@ -75,6 +76,7 @@ def cli() :
     return
   
   if cliArgs['check'] :
+    """
     prunedPatterns = []
     if cliArgs['prune'] :
       prunedPatterns = Grammar.pruneRepository(cliArgs['check'])
@@ -93,7 +95,9 @@ def cli() :
     if patternReferences : print(yaml.dump(patternReferences))
     else : print("")
     print("-----------------------------------------------------------------")
+    """
     return
+
 
   if cliArgs['scopePaths'] :
     withAction = False
