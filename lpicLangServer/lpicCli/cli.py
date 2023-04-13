@@ -16,14 +16,12 @@ def cli() :
     help="The base ConTeXt file to load OR the tmLanguage syntax file to save")
   argParser.add_argument('--save', metavar="base.scope", default='',
       help="Save a full tmLanguage syntax for use with VScode")
-  argParser.add_argument('--check', metavar="base.scope", default='',
+
+  argParser.add_argument('--check', action='store_true',
     help="Check the loaded grammar for missing and extra patterns"
   )
   argParser.add_argument('--prune', action='store_true',
     help="Prune unused patterns from grammar"
-  )
-  argParser.add_argument('--onlyActions', action='store_true',
-    help="Limit the scope paths to those with loaded actions"
   )
   argParser.add_argument("--grammar", action='store_true',
     help="Show the currently loaded Grammar"
@@ -53,19 +51,15 @@ def cli() :
   if cliArgs['prune'] : Grammar.pruneRules()
 
   if cliArgs['patterns'] :
-    patterns = Grammar.collectPatternReferences()
-    print("--patterns---------------------------------------------------")
-    print(yaml.dump(patterns))
+    Grammar.printPatternReferences()
     return
 
   if cliArgs['rules'] :
-    rules = Grammar.collectRules()
-    print("--rules------------------------------------------------------")
-    print(yaml.dump(rules))
+    Grammar.printRules()
     return
 
   if cliArgs['grammar'] :
-    Grammar.dumpGrammar()
+    Grammar.printGrammar()
     return
 
   if cliArgs['save'] : 
@@ -76,36 +70,11 @@ def cli() :
     return
   
   if cliArgs['check'] :
-    """
-    prunedPatterns = []
-    if cliArgs['prune'] :
-      prunedPatterns = Grammar.pruneRepository(cliArgs['check'])
-    missingPatterns, extraPatterns, patternReferences = Grammar.checkRepository(cliArgs['check'])
-    print("")
-    print("--missing patterns-----------------------------------------------")
-    if missingPatterns : print(yaml.dump(missingPatterns))
-    else : print("")
-    print("--extra patterns-------------------------------------------------")
-    if extraPatterns : print(yaml.dump(extraPatterns))
-    else : print("")
-    if prunedPatterns :
-      print("--pruned patterns------------------------------------------------")
-      print(yaml.dump(prunedPatterns))
-    print("--patterns-------------------------------------------------------")
-    if patternReferences : print(yaml.dump(patternReferences))
-    else : print("")
-    print("-----------------------------------------------------------------")
-    """
+    Grammar.printCheckRepositoryReport()
     return
 
-
   if cliArgs['scopePaths'] :
-    withAction = False
-    if cliArgs['onlyActions'] : withAction = True
-    scopePaths = Grammar.collectScopePaths(withAction=withAction)
-    print("---scope paths---------------------------------------------")
-    print(yaml.dump(scopePaths))
-    print("----------------------------------------------------------")
+    Grammar.printScopePaths()
     return
 
   if filePath == None :
