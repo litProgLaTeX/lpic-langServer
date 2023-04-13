@@ -7,7 +7,7 @@ from contextLangServer.processor.grammar import Grammar
 from contextLangServer.processor.documents import DocumentCache
 from contextLangServer.processor.scopeActions import ScopeActions
 
-#from .extract import extractFrom
+import contextLangServer.context.contextActions
 
 def cli() :
 
@@ -42,8 +42,10 @@ def cli() :
   #print(yaml.dump(cliArgs))
   filePath = cliArgs['filePath']
 
+  
+
   if cliArgs['actions'] :
-    ScopeActions.listActions()
+    ScopeActions.printActions()
     return
 
   Grammar.loadFromResourceDir('lpicSyntaxes')
