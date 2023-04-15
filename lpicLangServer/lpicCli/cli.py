@@ -3,11 +3,11 @@ import argparse
 import pprint
 import yaml
 
-from contextLangServer.processor.grammar import Grammar
-from contextLangServer.processor.documents import DocumentCache
-from contextLangServer.processor.scopeActions import ScopeActions
+from tmGrammars.grammar import Grammar
+from tmGrammars.documents import DocumentCache
+from tmGrammars.scopeActions import ScopeActions
 
-import contextLangServer.context.contextActions
+#import contextLangServer.context.contextActions
 
 def cli() :
 
