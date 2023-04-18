@@ -33,9 +33,6 @@ def cli() :
 
   tmGrammars.configuration.loadConfig(cliArgs, defaultConfig)
 
-  Grammar.collectRules()
-  if cliArgs['prune'] : Grammar.pruneRules()
-
   filePath = cliArgs['filePath']
   if filePath == None :
     print("You MUST specify a filePath when extracting LPiC code")
