@@ -1,5 +1,5 @@
 
-from contextLangServer.processor.scopeActions import ScopeActions
+from tmGrammars.scopeActions import ScopeActions
 
 @ScopeActions.method('source.ansic.code')
 def loadedStrParam(disp, ctx, aMessage, **kwargs) :

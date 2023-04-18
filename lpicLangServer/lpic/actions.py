@@ -1,6 +1,6 @@
 
-from contextLangServer.processor.scopeActions import ScopeActions
-from contextLangServer.processor.documents import Document
+from tmGrammars.scopeActions import ScopeActions
+from tmGrammars.documents import Document
 
 @ScopeActions.method('meta.source.lpic.include')
 def lpicInclude(someThing) :

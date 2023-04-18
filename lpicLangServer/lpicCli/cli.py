@@ -10,6 +10,17 @@ from tmGrammars.scopeActions import ScopeActions
 
 #import contextLangServer.context.contextActions
 
+# default configuration
+defaultConfig = {
+  'loadActions' : [
+    'lpicLangServer.lpic.lpicActions'
+  ],
+  'loadGrammar' : [
+    'lpicSyntaxes:context',
+    'lpicSyntaxes:lpic'
+  ]
+}
+
 def cli() :
 
   argParser  = argparse.ArgumentParser()
@@ -20,7 +31,7 @@ def cli() :
 
   cliArgs = vars(argParser.parse_args())
 
-  tmGrammars.configuration.loadConfig(cliArgs)
+  tmGrammars.configuration.loadConfig(cliArgs, defaultConfig)
 
   Grammar.collectRules()
   if cliArgs['prune'] : Grammar.pruneRules()
