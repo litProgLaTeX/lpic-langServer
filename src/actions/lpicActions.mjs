@@ -15,7 +15,7 @@ function loadedStrParam(disp, ctx, aMessage, callArgs) {
 export function registerActions(ScopeActions) {
 
   ScopeActions.addScopedAction(
-    'source.ansic.code',
+    'source.c.lpic',
     import.meta.url,
     { },
     loadedStrParam
