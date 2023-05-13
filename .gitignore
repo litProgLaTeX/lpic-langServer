@@ -1,3 +1,4 @@
+build
 pdm.lock
 tests/ansic/build
 .pdm-python
